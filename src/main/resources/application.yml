@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sirene
+    username: sirene_user
+    password: ${DB_PASSWORD}
+  main:
+    web-application-type: none
+
+sirene:
+  datasets-dir: datasets
+  descriptors-dir: datasets/csv
+  datasets:
+    - { dataset: StockDoublons_utf8.csv,                   descriptor: stockdoublons-311-dessin-de-fichier.csv,                                                table: te_doublons }
+    - { dataset: StockEtablissement_utf8.csv,              descriptor: stocketablissement-311-dessin-de-fichier.csv,                                           table: te_etablissement }
+    - { dataset: StockEtablissementHistorique_utf8.csv,    descriptor: liste-csv-des-variables-du-dessin-du-fichier-stocketablissementhistorique-311.csv,      table: te_etablissement_historique }
+    - { dataset: StockEtablissementLiensSuccession_utf8.csv, descriptor: liste-csv-des-variables-du-dessin-du-fichier-stocketablissementlienssuccession-311.csv, table: te_etablissement_liens_succession }
+    - { dataset: StockUniteLegale_utf8.csv,                descriptor: stockunitelegale-311-dessin-de-fichier.csv,                                             table: te_unite_legale }
+    - { dataset: StockUniteLegaleHistorique_utf8.csv,      descriptor: stockunitelegalehistorique-311-dessin-de-fichier.csv,                                   table: te_unite_legale_historique }

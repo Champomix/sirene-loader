@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: sirene-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: sirene
+      POSTGRES_USER: sirene_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?définir DB_PASSWORD (voir .env.example)}
+    ports:
+      - "5432:5432"
+    volumes:
+      - sirene_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sirene_user -d sirene"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  sirene_data:

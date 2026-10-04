@@ -1,0 +1,4 @@
+Nom,Libellé,Longueur,Type,Ordre
+siren,Numéro Siren,9,Texte,1
+sirenDoublon,Numéro Siren,9,Texte,2
+dateDernierTraitementDoublon,Date du dernier traitement du lien entre le siren valide et le siren doublon,23,Date,3

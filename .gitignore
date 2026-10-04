@@ -1,0 +1,7 @@
+target/
+datasets/*.csv
+datasets/archive/
+graphify-out/
+.claude/
+.DS_Store
+.env
