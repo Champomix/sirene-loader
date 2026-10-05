@@ -1,5 +1,7 @@
 # SIREN Loader
 
+Charge les fichiers stock de la base Sirene (INSEE) dans PostgreSQL. Java 25, Spring Boot 4.1, Maven.
+
 ## Principe
 
 Pour chaque dataset déclaré dans `application.yml` :
@@ -57,9 +59,7 @@ Les descripteurs PDF correspondants sont dans `documentation/`.
 ## Utilisation
 
 ```bash
-cp .env.example .env                    # puis y renseigner DB_PASSWORD
-docker compose up -d                    # démarre PostgreSQL (lit .env)
-export DB_PASSWORD=...                  # même valeur, pour l'application (Spring ne lit pas .env)
+docker compose up -d                    # démarre PostgreSQL
 mvn spring-boot:run                     # ou : mvn package && java -jar target/sirene-loader-0.0.1-SNAPSHOT.jar
 ```
 
@@ -69,7 +69,7 @@ mvn spring-boot:run                     # ou : mvn package && java -jar target/s
 
 | Clé | Rôle |
 | --- | --- |
-| `spring.datasource.url / username / password` | connexion PostgreSQL (mot de passe obligatoire via la variable d'environnement `DB_PASSWORD`) |
+| `spring.datasource.url / username / password` | connexion PostgreSQL (mot de passe surchargeable via `DB_PASSWORD`) |
 | `sirene.datasets-dir` | dossier des CSV de données |
 | `sirene.descriptors-dir` | dossier des descripteurs CSV |
 | `sirene.datasets` | liste `dataset` / `descriptor` / `table` |
@@ -79,4 +79,4 @@ mvn spring-boot:run                     # ou : mvn package && java -jar target/s
 - **Rechargement complet :** chaque lancement vide puis recharge toutes les tables.
 - **Évolution du schéma :** si un descripteur change, supprimer la table (`DROP TABLE`) avant de relancer, sinon l'ancien schéma est conservé.
 - **Doublons :** `StockDoublons` va dans `te_doublons` (et non `te_etablissement`, dont la structure est différente).
-- **Secrets :** le mot de passe n'est pas versionné : `DB_PASSWORD` (fichier `.env` ignoré par git, modèle dans `.env.example`).
+- **Secrets :** le mot de passe par défaut dans `application.yml` vient de `docker-compose.yml` ; à externaliser si le dépôt est partagé.
